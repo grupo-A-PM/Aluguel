@@ -6,17 +6,11 @@ Modelo: https://app.swaggerhub.com/apis/pasemes/sistema-de_controle_de_bicicleta
 Endpoints necessários
 
 POST /ciclista
-
 GET /ciclista/{idCiclista}
-
 PUT /ciclista/{idCiclista}
-
 POST /ciclista/{idCiclista}/ativar
-
 GET /ciclista/{idCiclista}/permiteAluguel
-
 GET /ciclista/{idCiclista}
-
 GET /ciclista/existeEmail/{email}
 
 Entrega deve ter:
