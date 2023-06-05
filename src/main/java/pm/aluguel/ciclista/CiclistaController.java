@@ -25,8 +25,16 @@ public class CiclistaController {
     public void registrarNovoCiclista(@RequestBody Ciclista ciclista){
         ciclistaService.adicionarNovoCiclista(ciclista);
     }
+    @DeleteMapping(path = "{idCiclista}")
+    public void removerCiclista(@PathVariable("idCiclista") int idCiclista){
+        ciclistaService.removerCiclista(idCiclista);
+    }
 
-
-
-
+    @PutMapping(path = "{idCiclista}")
+    public void atualizarCiclista(
+            @PathVariable("idCiclista") int idCiclista,
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String email){
+        ciclistaService.atualizarCiclista(idCiclista,nome,email);
+    }
 }

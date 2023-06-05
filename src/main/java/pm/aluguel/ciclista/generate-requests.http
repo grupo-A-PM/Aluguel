@@ -1,0 +1,33 @@
+POST http://localhost:8080/ciclista
+Content-Type: application/json
+
+{"email":"teste@gmail.com",
+  "nacionalidade":"Brasil",
+  "nascimento":"1990-04-13",
+  "nome":"Pessoa testel",
+  "senha":"senhateste"}
+
+###
+
+DELETE http://localhost:8080/ciclista/1
+
+###
+
+PUT http://localhost:8080/ciclista/1?nome=Maria
+Content-Type: application/
+
+###
+
+PUT http://localhost:8080/ciclista/1?email=jorge@gmail.com
+Content-Type: application/json
+
+###
+
+PUT http://localhost:8080/ciclista/1?nome=francisco&email=francisco@gmail.com
+Content-Type: application/json
+
+###
+
+PUT http://localhost:8080/ciclista/3?nome=Jorge&email=jorge@gmail.com
+Content-Type: application/json
+
