@@ -1,8 +1,22 @@
 package pm.aluguel.ciclista;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Ciclista {
+    @Id
+    @SequenceGenerator(
+            name = "ciclista_sequence",
+            sequenceName = "ciclista_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "ciclista_sequence"
+    )
     private Integer id;
     private String email;
     private String nacionalidade;

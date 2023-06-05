@@ -1,9 +1,7 @@
 package pm.aluguel.ciclista;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,15 +13,20 @@ import java.util.List;
 public class CiclistaController {
 
     private final CiclistaService ciclistaService;
-
     @Autowired
     public CiclistaController(CiclistaService ciclistaService) {
         this.ciclistaService = ciclistaService;
     }
-
     @GetMapping
-    public List<Ciclista> getCiclista() {
+    public List<Ciclista> getCiclistas() {
         return ciclistaService.getCiclistas();
     }
+    @PostMapping
+    public void registrarNovoCiclista(@RequestBody Ciclista ciclista){
+        ciclistaService.adicionarNovoCiclista(ciclista);
+    }
+
+
+
 
 }
