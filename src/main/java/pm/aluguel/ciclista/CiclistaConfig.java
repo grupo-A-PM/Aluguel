@@ -15,19 +15,39 @@ public class CiclistaConfig {
     CommandLineRunner commandLineRunner(CiclistaRepository repository){
         return args -> {
             Ciclista JoaoGabriel = new Ciclista(
-                    "jgevelinoliveira@gmail.com",
+                    1,
+                    "joao gabriel",
+                    LocalDate.now(),
+                    "cpf",
+                    "123456",
+                    LocalDate.now(),
+                    "BR",
                     "Brasil",
-                    LocalDate.of(1990, Month.APRIL,13),
-                    "Joao Gabriel",
-                    "senha1"
+                    "joaogabriel@gmail.com",
+                    "www.urljgfoto.com",
+                    "senhadojg",
+                    "JOAO GABRIEL",
+                    123456,
+                    LocalDate.now(),
+                    123
             );
 
             Ciclista JoaoPedro = new Ciclista(
-                    "jpedro@gmail.com",
+                    2,
+                    "joao pedro",
+                    LocalDate.now(),
+                    "cpf",
+                    "123456",
+                    LocalDate.now(),
+                    "BR",
                     "Brasil",
-                    LocalDate.of(2000, Month.JANUARY,13),
-                    "Joao Pedro",
-                    "senha2"
+                    "joaopedro@gmail.com",
+                    "www.urljpfoto.com",
+                    "senhadojp",
+                    "JOAO PEDRO",
+                    123456,
+                    LocalDate.now(),
+                    123
             );
 
             repository.saveAll(

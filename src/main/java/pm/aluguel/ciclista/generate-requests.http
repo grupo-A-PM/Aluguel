@@ -1,12 +1,6 @@
 POST http://localhost:8080/ciclista
 Content-Type: application/json
 
-{"email":"teste@gmail.com",
-  "nacionalidade":"Brasil",
-  "nascimento":"1990-04-13",
-  "nome":"Pessoa testel",
-  "senha":"senhateste"}
-
 ###
 
 DELETE http://localhost:8080/ciclista/1
