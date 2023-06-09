@@ -28,14 +28,11 @@ public class Ciclista {
     private String email;
     private String urlFotoDocumento;
     private String senha;
-    private String nomeTitularCartao;
-    private Integer numeroCartao;
-    private LocalDate validadeCartao;
-    private Integer cvvCartao;
-
-    public Ciclista(){
-
-    }
+    //private String nomeTitularCartao;
+    //private Integer numeroCartao;
+    //private LocalDate validadeCartao;
+   // private Integer cvvCartao;
+    private MeioDePagamento meioDePagamento;
 
     public Ciclista(Integer id, String nome, LocalDate nascimento, String cpf, String numeroPassaporte, LocalDate validadePassaporte, String paisPassaporte, String nacionalidade, String email, String urlFotoDocumento, String senha, String nomeTitularCartao, Integer numeroCartao, LocalDate validadeCartao, Integer cvvCartao) {
         this.id = id;
@@ -49,27 +46,13 @@ public class Ciclista {
         this.email = email;
         this.urlFotoDocumento = urlFotoDocumento;
         this.senha = senha;
+        /*
         this.nomeTitularCartao = nomeTitularCartao;
         this.numeroCartao = numeroCartao;
         this.validadeCartao = validadeCartao;
         this.cvvCartao = cvvCartao;
-    }
-
-    public Ciclista(String nome, LocalDate nascimento, String cpf, String numeroPassaporte, LocalDate validadePassaporte, String paisPassaporte, String nacionalidade, String email, String urlFotoDocumento, String senha, String nomeTitularCartao, Integer numeroCartao, LocalDate validadeCartao, Integer cvvCartao) {
-        this.nome = nome;
-        this.nascimento = nascimento;
-        this.cpf = cpf;
-        this.numeroPassaporte = numeroPassaporte;
-        this.validadePassaporte = validadePassaporte;
-        this.paisPassaporte = paisPassaporte;
-        this.nacionalidade = nacionalidade;
-        this.email = email;
-        this.urlFotoDocumento = urlFotoDocumento;
-        this.senha = senha;
-        this.nomeTitularCartao = nomeTitularCartao;
-        this.numeroCartao = numeroCartao;
-        this.validadeCartao = validadeCartao;
-        this.cvvCartao = cvvCartao;
+        */
+        this.meioDePagamento = meioDePagamento;
     }
 
     public String getNome() {
@@ -152,7 +135,7 @@ public class Ciclista {
         this.senha = senha;
     }
 
-    public String getNomeTitularCartao() {
+   /* public String getNomeTitularCartao() {
         return nomeTitularCartao;
     }
 
@@ -183,6 +166,14 @@ public class Ciclista {
     public void setCvvCartao(Integer cvvCartao) {
         this.cvvCartao = cvvCartao;
     }
+*/
+    public MeioDePagamento getMeioDePagamento() {
+        return meioDePagamento;
+    }
+
+    public void setMeioDePagamento(MeioDePagamento meioDePagamento) {
+        this.meioDePagamento = meioDePagamento;
+    }
 
     @Override
     public String toString() {
@@ -198,10 +189,11 @@ public class Ciclista {
                 ", email='" + email + '\'' +
                 ", urlFotoDocumento='" + urlFotoDocumento + '\'' +
                 ", senha='" + senha + '\'' +
-                ", nomeTitularCartao='" + nomeTitularCartao + '\'' +
-                ", numeroCartao=" + numeroCartao +
-                ", validadeCartao=" + validadeCartao +
-                ", cvvCartao=" + cvvCartao +
+                //                ", nomeTitularCartao='" + nomeTitularCartao + '\'' +
+                //                ", numeroCartao=" + numeroCartao +
+                //                 ", validadeCartao=" + validadeCartao +
+                //                 ", cvvCartao=" + cvvCartao +
+                ", meioDePagamento=" + meioDePagamento +
                 '}';
     }
 }
