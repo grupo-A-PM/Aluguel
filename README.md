@@ -3,15 +3,15 @@ Microsserviço aluguel
 
 Modelo: https://app.swaggerhub.com/apis/pasemes/sistema-de_controle_de_bicicletario2/1.
 
-Endpoints necessários
+Endpoints:
 
-POST /ciclista 
-GET /ciclista/{idCiclista}
-PUT /ciclista/{idCiclista}
-POST /ciclista/{idCiclista}/ativar
-GET /ciclista/{idCiclista}/permiteAluguel
-GET /ciclista/{idCiclista}
-GET /ciclista/existeEmail/{email}
+- POST /ciclista 
+- GET /ciclista/{idCiclista}
+- PUT /ciclista/{idCiclista}
+- POST /ciclista/{idCiclista}/ativar
+- GET /ciclista/{idCiclista}/permiteAluguel
+- GET /ciclista/{idCiclista}
+- GET /ciclista/existeEmail/{email}
 
 Entrega deve ter:
 
