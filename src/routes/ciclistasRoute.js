@@ -4,8 +4,7 @@ const ciclistasController = require('../controller/ciclistasController');
 
 const { handler } = require('../index');
 
-const routes = async (fastify) => {
-
+const routesCiclista = async (fastify) => {
     fastify.get('/ciclistas', ciclistasController.getCiclistas);
     fastify.post('/ciclistas', ciclistasController.criarCiclista);
     fastify.get('/ciclistas/:id', ciclistasController.getCiclistaById);
@@ -15,4 +14,4 @@ const routes = async (fastify) => {
     
 }
 
-module.exports = routes;
+module.exports = routesCiclista;
