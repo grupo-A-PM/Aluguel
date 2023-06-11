@@ -29,7 +29,8 @@ const { v4: uuidv4 } = require('uuid');
       numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
       validade: "2023-06-11",
       cvv: "4857"
-    }
+    },
+    ativo: true
   },
   {
     id: uuidv4(),
@@ -50,7 +51,8 @@ const { v4: uuidv4 } = require('uuid');
       numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
       validade: "2023-06-11",
       cvv: "4857"
-    }
+    },
+    ativo: true
   },
   {
     id: uuidv4(),
@@ -71,7 +73,8 @@ const { v4: uuidv4 } = require('uuid');
       numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
       validade: "2023-06-11",
       cvv: "4857"
-    }
+    },
+    ativo: true
   },
 ];
 
@@ -91,6 +94,7 @@ const criarCiclista = async (request, reply) => {
     // ID usando UUID
     const id = uuidv4();
     novoCiclista.id = id;
+    novoCiclista.ativo = false;
 
     // Verificar se o e-mail já foi utilizado por algum ciclista
     const emailExistente = ciclistas.some(c => c.email === novoCiclista.email);
@@ -99,7 +103,7 @@ const criarCiclista = async (request, reply) => {
     }
 
     if (!novoCiclista.email || !novoCiclista.nacionalidade || !novoCiclista.nome || !novoCiclista.senha) {
-      return reply.status(400).send('Preencha o todos os campos obrigatórios e tente novamente')
+      return reply.status(400).send('Preencha todos os campos obrigatórios e tente novamente')
     }
 
     ciclistas.push(novoCiclista)
