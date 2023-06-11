@@ -137,6 +137,7 @@ const atualizarCiclista = async (request, reply) => {
     }
 
     const ciclistaAtualizado = { ...ciclista, ...dadosAtualizados }
+
     ciclistas[ciclistas.indexOf(ciclista)] = { ...ciclista, ...dadosAtualizados }
 
     return reply.send(ciclistaAtualizado)
@@ -168,7 +169,7 @@ const verificarAluguelBicicleta = async (request, reply) => {
   try {
 
     const id = request.params.id
-    const ciclista = ciclistas.find(c => c.id === id);
+    const ciclista = ciclistas.some(c => c.id === id && c.ativo);
 
     if (!ciclista) {
       return reply.status(404).send('Ciclista não encontrado');
