@@ -2,7 +2,7 @@
 
 const ciclistasController = require('../controller/ciclistasController');
 
-const { handler } = require('../index');
+// const { handler } = require('../index');
 
 const routes = async (fastify) => {
 
@@ -10,8 +10,8 @@ const routes = async (fastify) => {
     fastify.post('/ciclistas', ciclistasController.criarCiclista);
     fastify.get('/ciclistas/:id', ciclistasController.getCiclistaById);
     fastify.put('/ciclistas/:id', ciclistasController.atualizarCiclista);
-    fastify.put('/ciclistas/:id', ciclistasController.ativarCadastroCiclista);
-    fastify.put('/ciclistas/:id', ciclistasController.verificarAluguelBicicleta);
+    fastify.post('/ciclistas/:id/ativar', ciclistasController.ativarCadastroCiclista);
+    fastify.get('/ciclistas/:id/verificar-aluguel', ciclistasController.verificarAluguelBicicleta);
     
 }
 
