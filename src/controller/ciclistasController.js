@@ -131,12 +131,9 @@ const getCiclistaById = async (request, reply) => {
 
 const atualizarCiclista = async (request, reply) => {
   try {
-    //const id = parseInt(request.params.id)
     const id = request.params.id
-    console.log("ID: "+id)
-    //const dadosAtualizados = request.body
+    //console.log("ID: "+id)
     const dadosAtualizados = request.body
-    console.log("Dados atualizados: "+ dadosAtualizados)
     const ciclista = ciclistas.find(c => c.id === id)
 
     if (!ciclista) {
@@ -144,10 +141,9 @@ const atualizarCiclista = async (request, reply) => {
     }
 
     const ciclistaAtualizado = { ...ciclista, ...dadosAtualizados }
-    console.log("Ciclista Atualizado: "+ciclistaAtualizado)
-    console.log("Index do ciclista: "+ciclistas.indexOf(ciclista))
-    //ciclistas[ciclistas.indexOf(ciclista)] = ciclistaAtualizado
-    ciclistas[ciclistas.indexOf(ciclista)] = dadosAtualizados
+    //console.log("Ciclista Atualizado: " + ciclistaAtualizado)
+    //console.log("Index do ciclista: " + ciclistas.indexOf(ciclista))
+    ciclistas[ciclistas.indexOf(ciclista)] = { ...ciclista, ...dadosAtualizados }
 
     return reply.send(ciclistaAtualizado)
   } catch (error) {
@@ -177,9 +173,9 @@ const ativarCadastroCiclista = async (request, reply) => {
 
 const verificarAluguelBicicleta = async (request, reply) => {
   try {
-    //const id = parseInt(request.params.id);
+
     const id = request.params.id
-    const ciclista = ciclistas.find(c => c.id === id);
+    const ciclista = ciclistas.some(c => c.id === id && c.ativo);
 
     if (!ciclista) {
       return reply.status(404).send('Ciclista não encontrado');
