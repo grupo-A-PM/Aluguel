@@ -15,6 +15,13 @@ Microsserviço:
 <a>https://app.swaggerhub.com/apis/pasemes/sistema-de_controle_de_bicicletario2/1.</a>
 
 <br>
+<p>Casos de Uso:</p>
+
+- UC01 Cadastrar Ciclista
+- UC06 Alterar Dados Ciclista
+- UC07 Alterar Cartão
+- UC15 Manter Cadastro de Funcionário
+
 <p>Endpoints:</p>
 
 - POST /ciclista 
@@ -63,6 +70,8 @@ $ npm test
 
 <h4 align="center">
   Você pode visualizar a aplicação funcionando através do link: <br>
+
   <a>site aqui</a>
+  
 </h4>
 
