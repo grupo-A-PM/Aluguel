@@ -1,12 +1,79 @@
 const { v4: uuidv4 } = require('uuid');
 
-let ciclistas = [
+/* let ciclistas = [
     { id: 1, nome: 'Joao Gabriel', idade: 25, email: 'joaogabriel@example.com', cpf:11111111111, nacionalidade: "BR", senha:"12345", cartao: 123456, cvv: 123 },
     { id: 2, nome: 'Mariana', idade: 25, email: 'mariana@example.com', cpf:11111111111, nacionalidade: "BR", senha:"12345", cartao: 123456, cvv: 123 },
     { id: 3, nome: 'Joao Pedro', idade: 25, email: 'joaopedro@example.com', cpf:11111111111, nacionalidade: "BR", senha:"12345", cartao: 123456, cvv: 123 },
     { id: 4, nome: 'Jessica', idade: 25, email: 'jessica@example.com', cpf:11111111111, nacionalidade: "BR", senha:"12345", cartao: 123456, cvv: 123 },
     { id: 5, nome: 'Paulo', idade: 25, email: 'paulo@example.com', cpf:11111111111, nacionalidade: "BR", senha:"12345", cartao: 123456, cvv: 123 },
-  ];
+  ]; */
+
+  //Alguns ciclistas pré-cadastrados
+  let ciclistas = [
+  {
+    id: uuidv4(),
+    nome: "Joao Gabriel",
+    nascimento: "2023-06-11",
+    cpf: "87942565300", 
+    passaporte: {
+      numero: "string",
+      validade: "2023-06-11",
+      pais: "TX"
+    },
+    nacionalidade: "string",
+    email: "jgevelin@example.com",
+    urlFotoDocumento: "string",
+    senha: "string",
+    meioDePagamento: {
+      nomeTitular: "string",
+      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
+      validade: "2023-06-11",
+      cvv: "4857"
+    }
+  },
+  {
+    id: uuidv4(),
+    nome: "Mariana",
+    nascimento: "2023-06-11",
+    cpf: "87942565300", 
+    passaporte: {
+      numero: "string",
+      validade: "2023-06-11",
+      pais: "TX"
+    },
+    nacionalidade: "string",
+    email: "user@example.com",
+    urlFotoDocumento: "string",
+    senha: "string",
+    meioDePagamento: {
+      nomeTitular: "string",
+      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
+      validade: "2023-06-11",
+      cvv: "4857"
+    }
+  },
+  {
+    id: uuidv4(),
+    nome: "Joao Pedro",
+    nascimento: "2023-06-11",
+    cpf: "87942565300", 
+    passaporte: {
+      numero: "string",
+      validade: "2023-06-11",
+      pais: "TX"
+    },
+    nacionalidade: "string",
+    email: "user@example.com",
+    urlFotoDocumento: "string",
+    senha: "string",
+    meioDePagamento: {
+      nomeTitular: "string",
+      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
+      validade: "2023-06-11",
+      cvv: "4857"
+    }
+  },
+];
 
 const getCiclistas = async (request, reply) => {
   try {
@@ -31,7 +98,7 @@ const criarCiclista = async (request, reply) => {
       return reply.status(400).send('E-mail já está em uso por outro ciclista. Escolha um email diferente.');
     }
 
-    if (!novoCiclista.email || !novoCiclista.nacionalidade || !novoCiclista.nascimento || !novoCiclista.nome || !novoCiclista.senha) {
+    if (!novoCiclista.email || !novoCiclista.nacionalidade || !novoCiclista.nome || !novoCiclista.senha) {
       return reply.status(400).send('Preencha o todos os campos obrigatórios e tente novamente')
     }
 
@@ -47,7 +114,8 @@ const criarCiclista = async (request, reply) => {
 
 const getCiclistaById = async (request, reply) => {
   try {
-    const id = parseInt(request.params.id)
+    //const id = parseInt(request.params.id)
+    const id = request.params.id
     const ciclista = ciclistas.find(c => c.id === id)
 
     if (!ciclista) {
@@ -63,8 +131,12 @@ const getCiclistaById = async (request, reply) => {
 
 const atualizarCiclista = async (request, reply) => {
   try {
-    const id = parseInt(request.params.id)
+    //const id = parseInt(request.params.id)
+    const id = request.params.id
+    console.log("ID: "+id)
+    //const dadosAtualizados = request.body
     const dadosAtualizados = request.body
+    console.log("Dados atualizados: "+ dadosAtualizados)
     const ciclista = ciclistas.find(c => c.id === id)
 
     if (!ciclista) {
@@ -72,7 +144,10 @@ const atualizarCiclista = async (request, reply) => {
     }
 
     const ciclistaAtualizado = { ...ciclista, ...dadosAtualizados }
-    ciclistas[ciclistas.indexOf(ciclista)] = ciclistaAtualizado
+    console.log("Ciclista Atualizado: "+ciclistaAtualizado)
+    console.log("Index do ciclista: "+ciclistas.indexOf(ciclista))
+    //ciclistas[ciclistas.indexOf(ciclista)] = ciclistaAtualizado
+    ciclistas[ciclistas.indexOf(ciclista)] = dadosAtualizados
 
     return reply.send(ciclistaAtualizado)
   } catch (error) {
@@ -83,7 +158,8 @@ const atualizarCiclista = async (request, reply) => {
 
 const ativarCadastroCiclista = async (request, reply) => {
   try {
-    const id = parseInt(request.params.id);
+    //const id = parseInt(request.params.id);
+    const id = request.params.id;
     const ciclista = ciclistas.find(c => c.id === id);
 
     if (!ciclista) {
@@ -101,7 +177,8 @@ const ativarCadastroCiclista = async (request, reply) => {
 
 const verificarAluguelBicicleta = async (request, reply) => {
   try {
-    const id = parseInt(request.params.id);
+    //const id = parseInt(request.params.id);
+    const id = request.params.id
     const ciclista = ciclistas.find(c => c.id === id);
 
     if (!ciclista) {
