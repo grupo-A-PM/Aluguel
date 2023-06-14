@@ -146,8 +146,7 @@ const removerFuncionario = async(request, reply) => {
     } catch (error) {
         console.error(error)
         reply.status(500).send('Erro ao obter funcionario')
-}
-
+  }
 }
 
 module.exports = {

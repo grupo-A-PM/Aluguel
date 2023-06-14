@@ -70,9 +70,10 @@ const { v4: uuidv4 } = require('uuid');
   },
 ];
 
+//Acho que esse metodo nao existe
 const getCiclistas = async (request, reply) => {
   try {
-    return reply.status(201).send(ciclistas)
+    return reply.status(200).send(ciclistas)
   } catch (error) {
     console.error(error)
     reply.status(500).send('Erro ao obter ciclistas')
@@ -83,26 +84,23 @@ const criarCiclista = async (request, reply) => {
   try {
     const novoCiclista = request.body
 
-    // ID usando UUID
     const id = uuidv4();
     novoCiclista.id = id;
 
     novoCiclista.ativo = false;
 
-    // Verificar se o e-mail já foi utilizado por algum ciclista
-    const emailExistente = ciclistas.some(c => c.email === novoCiclista.email);
-    if (emailExistente) {
-      return reply.status(400).send('E-mail já está em uso por outro ciclista. Escolha um email diferente.');
+    // Chama metodo de verificacao de email
+    const resultadoVerificacaoEmail = verificarEmail(novoCiclista.email);
+    if (!resultadoVerificacaoEmail.success) {
+      return reply.status(resultadoVerificacaoEmail.status).send(resultadoVerificacaoEmail.message);
     }
 
     if (!novoCiclista.email || !novoCiclista.nacionalidade || !novoCiclista.nome || !novoCiclista.senha) {
-      return reply.status(400).send('Preencha todos os campos obrigatórios e tente novamente')
+      return reply.status(422).send('Dados inválidos. Preencha todos os campos obrigatórios e tente novamente.');
     }
 
-    ciclistas.push(novoCiclista)
-    reply.status(201).send('Ciclista cadastrado com sucesso!')
-
-    return reply.send(novoCiclista)
+    ciclistas.push(novoCiclista);
+    return reply.status(201).send(novoCiclista);
   } catch (error) {
     console.error(error)
     reply.status(500).send('Erro ao criar ciclista')
@@ -116,13 +114,36 @@ const getCiclistaById = async (request, reply) => {
     const ciclista = ciclistas.find(c => c.id === id)
 
     if (!ciclista) {
-      return reply.status(404).send('Ciclista não encontrado')
+      return reply.status(404).send({
+        codigo: "404",
+        mensagem: "Requisição não encontrada"
+      });
     }
 
-    return reply.send(ciclista)
+    //retornar apenas os dados que desejamos
+    const dadosCiclista = {
+      id: ciclista.id,
+      status: ciclista.ativo ? 'Ativo' : 'Inativo',
+      nome: ciclista.nome,
+      nascimento: ciclista.nascimento,
+      cpf: ciclista.cpf,
+      passaporte: {
+        numero: ciclista.passaporte.numero,
+        validade: ciclista.passaporte.validade,
+        pais: ciclista.passaporte.pais
+      },
+      nacionalidade: ciclista.nacionalidade,
+      email: ciclista.email,
+      urlFotoDocumento: ciclista.urlFotoDocumento
+    };
+
+    return reply.send(dadosCiclista)
   } catch (error) {
     console.error(error)
-    reply.status(500).send('Erro ao obter ciclista')
+    reply.status(422).send({
+      codigo: "422",
+      mensagem: "Dados inválidos"
+    })
   }
 }
 
@@ -140,10 +161,10 @@ const atualizarCiclista = async (request, reply) => {
 
     ciclistas[ciclistas.indexOf(ciclista)] = { ...ciclista, ...dadosAtualizados }
 
-    return reply.send(ciclistaAtualizado)
+    return reply.status(200).send('Dados atualizados' + JSON.stringify(ciclista))
   } catch (error) {
     console.error(error)
-    reply.status(500).send('Erro ao atualizar ciclista')
+    reply.status(422).send('Dados inválidos');
   }
 }
 
@@ -158,13 +179,14 @@ const ativarCadastroCiclista = async (request, reply) => {
 
     ciclista.ativo = true;
 
-    return reply.send('Cadastro ativado com sucesso!');
+    return reply.status(200).send('Ciclista ativado' + + JSON.stringify(ciclista))
   } catch (error) {
     console.error(error);
-    reply.status(500).send('Erro ao ativar cadastro do ciclista');
+    reply.status(422).send('Dados inválidos');
   }
 };
 
+//REVER
 const verificarAluguelBicicleta = async (request, reply) => {
   try {
 
@@ -172,20 +194,52 @@ const verificarAluguelBicicleta = async (request, reply) => {
     const ciclista = ciclistas.some(c => c.id === id && c.ativo);
 
     if (!ciclista) {
-      return reply.status(404).send('Ciclista não encontrado');
+      return reply.status(404).send({
+        codigo: '404',
+        mensagem: 'Ciclista não encontrado'
+      });
     }
 
-    if (!ciclista.ativo) {
-      return reply.status(403).send('Cadastro do ciclista não ativado. Não pode alugar bicicleta');
-    }
+    const cadastroAtivo = !!ciclista.ativo;
 
-    return reply.status(200).send('Ciclista pode alugar bicicleta');
+    return reply.status(200).send(cadastroAtivo);
 
   } catch (error) {
     console.error(error);
     reply.status(500).send('Erro ao verificar aluguel de bicicleta');
   }
 };
+
+const verificarEmail = (email) => {
+
+  if (!email) {
+    return reply.status(400).send({
+      success: false,
+      status: 400,
+      message: 'E-mail não fornecido',
+    });
+  }
+  
+  const emailEmUso = ciclistas.some((c) => c.email === email);
+
+  if (emailEmUso) {
+    return {
+      success: false,
+      status: 400,
+      message: 'E-mail já está em uso por outro ciclista. Escolha um e-mail diferente.',
+    };
+  }
+
+  return {
+    success: true,
+    status: 200,
+    message: 'E-mail disponível para uso.',
+  };
+};
+
+//metodo cartao de credito GET
+
+//metodo cartao de credito PUT
 
 module.exports = {
   getCiclistas,
