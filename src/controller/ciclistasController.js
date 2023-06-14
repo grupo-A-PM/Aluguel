@@ -179,7 +179,7 @@ const ativarCadastroCiclista = async (request, reply) => {
 
     ciclista.ativo = true;
 
-    return reply.status(200).send('Ciclista ativado' + + JSON.stringify(ciclista))
+    return reply.status(200).send('Ciclista ativado' + JSON.stringify(ciclista))
   } catch (error) {
     console.error(error);
     reply.status(422).send('Dados inválidos');
@@ -187,11 +187,11 @@ const ativarCadastroCiclista = async (request, reply) => {
 };
 
 //REVER
-const verificarAluguelBicicleta = async (request, reply) => {
+const permiteAluguel = async (request, reply) => {
   try {
 
     const id = request.params.id
-    const ciclista = ciclistas.some(c => c.id === id && c.ativo);
+    const ciclista = ciclistas.find(c => c.id === id && c.ativo);
 
     if (!ciclista) {
       return reply.status(404).send({
@@ -220,7 +220,7 @@ const verificarEmail = (email) => {
     });
   }
   
-  const emailEmUso = ciclistas.some((c) => c.email === email);
+  const emailEmUso = ciclistas.find((c) => c.email === email);
 
   if (emailEmUso) {
     return {
@@ -238,8 +238,43 @@ const verificarEmail = (email) => {
 };
 
 //metodo cartao de credito GET
+const getCartaoCredito = async (request, reply) => {
+  try {
+    const id = request.params.id;
+    const ciclista = ciclistas.find(c => c.id === id);
+
+    if (!ciclista) {
+      return reply.status(404).send('Ciclista não encontrado');
+    }
+
+    const cartaoCredito = ciclista.meioDePagamento;
+
+    return reply.status(200).send(cartaoCredito);
+  } catch (error) {
+    console.error(error);
+    reply.status(422).send('Dados inválidos');
+  }
+};
 
 //metodo cartao de credito PUT
+const atualizarCartaoCredito = async (request, reply) => {
+  try {
+    const id = request.params.id;
+    const dadosAtualizados = request.body;
+    const ciclista = ciclistas.find(c => c.id === id);
+
+    if (!ciclista) {
+      return reply.status(404).send('Ciclista não encontrado');
+    }
+
+    ciclista.meioDePagamento = { ...ciclista.meioDePagamento, ...dadosAtualizados };
+
+    return reply.status(200).send('Dados do cartão de crédito atualizados');
+  } catch (error) {
+    console.error(error);
+    reply.status(422).send('Dados inválidos');
+  }
+};
 
 module.exports = {
   getCiclistas,
@@ -247,5 +282,7 @@ module.exports = {
   getCiclistaById,
   atualizarCiclista,
   ativarCadastroCiclista,
-  verificarAluguelBicicleta
+  permiteAluguel,
+  getCartaoCredito,
+  atualizarCartaoCredito
 }

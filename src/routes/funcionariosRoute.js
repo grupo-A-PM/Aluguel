@@ -2,9 +2,8 @@
 
 const funcionariosController = require('../controller/funcionariosController');
 
-const { handler } = require('../index');
-
 const routesFuncionario = async (fastify) => {
+    
     fastify.get('/funcionarios', funcionariosController.getFuncionarios);
     fastify.post('/funcionarios', funcionariosController.criarFuncionario);
     fastify.get('/funcionarios/:id', funcionariosController.getFuncionarioById);
