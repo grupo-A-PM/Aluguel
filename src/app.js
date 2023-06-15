@@ -1,8 +1,8 @@
 'use strict'
 
 const fastify = require('fastify');
-const ciclistasRoute = require('./routes/ciclistasRoute');
-const funcionariosRoute = require('./routes/funcionariosRoute');
+require('./routes/ciclistasRoute');
+require('./routes/funcionariosRoute');
 
 const build = (opts = {}) => {
     const app = fastify(opts);

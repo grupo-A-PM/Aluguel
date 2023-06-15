@@ -1,82 +1,13 @@
 const { v4: uuidv4 } = require('uuid');
+const { ciclistas } = require('../data.js');
 
-  //Alguns ciclistas pré-cadastrados
-  let ciclistas = [
-  {
-    id: uuidv4(),
-    nome: "Joao Gabriel",
-    nascimento: "2023-06-11",
-    cpf: "87942565300", 
-    passaporte: {
-      numero: "string",
-      validade: "2023-06-11",
-      pais: "TX"
-    },
-    nacionalidade: "string",
-    email: "jgevelin@example.com",
-    urlFotoDocumento: "string",
-    senha: "string",
-    meioDePagamento: {
-      nomeTitular: "string",
-      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
-      validade: "2023-06-11",
-      cvv: "4857"
-    },
-    ativo: true
-  },
-  {
-    id: uuidv4(),
-    nome: "Mariana",
-    nascimento: "2023-06-11",
-    cpf: "87942565300", 
-    passaporte: {
-      numero: "string",
-      validade: "2023-06-11",
-      pais: "TX"
-    },
-    nacionalidade: "string",
-    email: "user@example.com",
-    urlFotoDocumento: "string",
-    senha: "string",
-    meioDePagamento: {
-      nomeTitular: "string",
-      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
-      validade: "2023-06-11",
-      cvv: "4857"
-    },
-    ativo: true
-  },
-  {
-    id: uuidv4(),
-    nome: "Joao Pedro",
-    nascimento: "2023-06-11",
-    cpf: "87942565300", 
-    passaporte: {
-      numero: "string",
-      validade: "2023-06-11",
-      pais: "TX"
-    },
-    nacionalidade: "string",
-    email: "user@example.com",
-    urlFotoDocumento: "string",
-    senha: "string",
-    meioDePagamento: {
-      nomeTitular: "string",
-      numero: "984602367621417541873846007875805616119812247741040998629140438970271355",
-      validade: "2023-06-11",
-      cvv: "4857"
-    },
-    ativo: true
-  },
-];
-
-//Acho que esse metodo nao existe
-const getCiclistas = async (request, reply) => {
+// Acho que esse metodo nao existe <<<<<<< DELETAR
+async function getCiclistas(request, reply) {
   try {
-    return reply.status(200).send(ciclistas)
+    return reply.status(200).send(ciclistas);
   } catch (error) {
-    console.error(error)
-    reply.status(500).send('Erro ao obter ciclistas')
+    console.error(error);
+    reply.status(500).send('Erro ao obter ciclistas');
   }
 }
 
@@ -109,7 +40,6 @@ const criarCiclista = async (request, reply) => {
 
 const getCiclistaById = async (request, reply) => {
   try {
-
     const id = request.params.id
     const ciclista = ciclistas.find(c => c.id === id)
 
@@ -120,7 +50,7 @@ const getCiclistaById = async (request, reply) => {
       });
     }
 
-    //retornar apenas os dados que desejamos
+    //retornar apenas os dados que desejamos <<< TEM METODO MELHOR DE FAZER ISSO?
     const dadosCiclista = {
       id: ciclista.id,
       status: ciclista.ativo ? 'Ativo' : 'Inativo',
@@ -237,7 +167,6 @@ const verificarEmail = (email) => {
   };
 };
 
-//metodo cartao de credito GET
 const getCartaoCredito = async (request, reply) => {
   try {
     const id = request.params.id;
@@ -256,7 +185,6 @@ const getCartaoCredito = async (request, reply) => {
   }
 };
 
-//metodo cartao de credito PUT
 const atualizarCartaoCredito = async (request, reply) => {
   try {
     const id = request.params.id;

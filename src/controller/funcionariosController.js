@@ -1,57 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-
-let funcionarios = [
-    {
-        id: uuidv4(),
-        senha: "senhafuncionario1",
-        confirmacaoSenha: "senhafuncionario1",
-        email: "funcionario1@example.com",
-        nome: "funcionario1",
-        idade: 0,
-        funcao: "funcionario",
-        cpf: "cpfdofuncionario1"
-    },
-    {
-        id: uuidv4(),
-        senha: "senhafuncionario2",
-        confirmacaoSenha: "senhafuncionario2",
-        email: "funcionario2@example.com",
-        nome: "funcionario2",
-        idade: 0,
-        funcao: "funcionario",
-        cpf: "cpfdofuncionario2"
-    },
-    {
-        id: uuidv4(),
-        senha: "senhafuncionario3",
-        confirmacaoSenha: "senhafuncionario3",
-        email: "funcionario3@example.com",
-        nome: "funcionario3",
-        idade: 0,
-        funcao: "funcionario",
-        cpf: "cpfdofuncionario3"
-    },
-    {
-        id: uuidv4(),
-        senha: "senhafuncionario4",
-        confirmacaoSenha: "senhafuncionario4",
-        email: "funcionario4@example.com",
-        nome: "funcionario4",
-        idade: 0,
-        funcao: "funcionario",
-        cpf: "cpfdofuncionario4"
-    },
-    {
-        id: uuidv4(),
-        senha: "senhafuncionario5",
-        confirmacaoSenha: "senhafuncionario5",
-        email: "funcionario5@example.com",
-        nome: "funcionario5",
-        idade: 0,
-        funcao: "funcionario",
-        cpf: "cpfdofuncionario5"
-    }
-]
+const { funcionarios } = require('../data.js');
 
 const getFuncionarios = async (request, reply) => {
     try {

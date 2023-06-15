@@ -9,7 +9,7 @@ const server = build();
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 server.listen({port: SERVER_PORT, host: "0.0.0.0"}, (err, address) => {
-    if(err){
+    if(err) {
         log.error(err);
         process.exit(1);
     }
