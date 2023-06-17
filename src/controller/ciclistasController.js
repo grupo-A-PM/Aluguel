@@ -27,14 +27,14 @@ const criarCiclista = async (request, reply) => {
     }
 
     if (!novoCiclista.email || !novoCiclista.nacionalidade || !novoCiclista.nome || !novoCiclista.senha) {
-      return reply.status(422).send('Dados inválidos. Preencha todos os campos obrigatórios e tente novamente.');
+      return reply.status(404).send('Requisição mal formada. Preencha todos os campos obrigatórios e tente novamente.');
     }
 
     ciclistas.push(novoCiclista);
     return reply.status(201).send(novoCiclista);
   } catch (error) {
     console.error(error)
-    reply.status(500).send('Erro ao criar ciclista')
+    reply.status(422).send('Dados inválidos')
   }
 }
 
@@ -140,8 +140,8 @@ const permiteAluguel = async (request, reply) => {
   }
 };
 
+/* ********                EMAIL                   ********    */
 const verificarEmail = (email) => {
-
   if (!email) {
     return reply.status(400).send({
       success: false,
@@ -149,22 +149,43 @@ const verificarEmail = (email) => {
       message: 'E-mail não fornecido',
     });
   }
-  
-  const emailEmUso = ciclistas.find((c) => c.email === email);
 
+  const result = validateEmailFormat(email);
+  if(!result) {
+    return{
+      status: 422,
+      message: 'Dados inválidos.'
+    }
+  };
+
+  const emailEmUso = ciclistas.find((c) => c.email === email);
   if (emailEmUso) {
     return {
-      success: false,
-      status: 400,
-      message: 'E-mail já está em uso por outro ciclista. Escolha um e-mail diferente.',
+      success: true,
+      status: 200,
+      message: 'E-mail já está em uso por outro ciclista. Escolha um e-mail diferente.'
     };
+  } else {
+      return {
+        success: false,
+        status: 200
+      };
   }
+};
 
-  return {
-    success: true,
-    status: 200,
-    message: 'E-mail disponível para uso.',
-  };
+const validateEmailFormat = async (email) => {
+  return new Promise((resolve, reject) => {
+      const emailRegex = new RegExp(/^[a-zA-Z0-9_%+-]+@[a-zA-Z0-9.-]+[a-zA-Z0-9-]+(.[a-zA-Z]{2,})$/, "gm");
+
+      const timer = setTimeout(() => {
+          resolve(false); // Timeout reached, return false indicating invalid format
+      }, REGEX_TIMEOUT);
+
+      const result = emailRegex.test(email);
+
+      clearTimeout(timer);
+      resolve(result); // Resolve with the result of the regex evaluation
+  });
 };
 
 const getCartaoCredito = async (request, reply) => {

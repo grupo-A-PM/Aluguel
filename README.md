@@ -11,32 +11,43 @@ Microsserviço:
 </h4>
 
 <br>
-<p>Modelo:</p>
-<a>https://app.swaggerhub.com/apis/pasemes/sistema-de_controle_de_bicicletario2/1.</a>
+Modelo:<br>
+<a target="_blank">https://app.swaggerhub.com/apis/pasemes/sistema-de_controle_de_bicicletario2/1</a>
 
 <br>
-<p>Casos de Uso:</p>
+Casos de Uso:
 
 - UC01 Cadastrar Ciclista
 - UC06 Alterar Dados Ciclista
 - UC07 Alterar Cartão
 - UC15 Manter Cadastro de Funcionário
 
-<p>Endpoints:</p>
-
-- POST /ciclista 
-- GET /ciclista/{idCiclista}
-- PUT /ciclista/{idCiclista}
-- POST /ciclista/{idCiclista}/ativar
-- GET /ciclista/{idCiclista}/permiteAluguel
-- GET /ciclista/{idCiclista}
-- GET /ciclista/existeEmail/{email}
+Endpoints:
+  <ul>
+    <li><input type="checkbox" checked>POST /ciclista</li>
+    <li><input type="checkbox" checked>GET /ciclista/{idCiclista}</li>
+    <li><input type="checkbox" checked>PUT /ciclista/{idCiclista}</li>
+    <li><input type="checkbox" checked>POST /ciclista/{idCiclista}/ativar</li>
+    <li><input type="checkbox" checked>GET /ciclista/{idCiclista}/permiteAluguel</li>
+    <li><input type="checkbox">GET /ciclista/{idCiclista}/bicicletaAlugada</li>
+    <li><input type="checkbox" checked>GET /ciclista/{idCiclista}</li>
+    <li><input type="checkbox" checked>GET /ciclista/existeEmail/{email}</li>
+    <li><input type="checkbox" checked>GET /funcionario</li>
+    <li><input type="checkbox" checked>POST /funcionario</li>
+    <li><input type="checkbox" checked>GET /funcionario/{idFuncionario}</li>
+    <li><input type="checkbox" checked>PUT /funcionario/{idFuncionario}</li>
+    <li><input type="checkbox" checked>DELETE /funcionario/{idFuncionario}</li>
+    <li><input type="checkbox" checked>GET /cartaoDeCredito/{idCiclista}</li>
+    <li><input type="checkbox" checked>PUT /cartaoDeCredito/{idCiclista}</li>
+    <li><input type="checkbox">POST /aluguel</li>
+    <li><input type="checkbox">POST /devolucao</li>
+  </ul>
 
 A entrega deve ter:
 
-Testes unitários em abundância (escopo de método), utilizando mocks (ex: com framework mockito) quando necessário;
+- Testes unitários em abundância (escopo de método), utilizando mocks;
 
-A ferramenta Sonar configurada (no sonarcloud.io) com: (i) 0 Bug, (ii) 0 Vulnerability, (iii)  0 Code Smells nas severidades blocker, critical e major (minor e info sem restrições), (iv) testes unitários com cobertura de código mínima de 80% e (v) menos de 1% de duplicação de código. 
+- A ferramenta Sonar configurada (no sonarcloud.io) com: (i) 0 Bug, (ii) 0 Vulnerability, (iii)  0 Code Smells nas severidades blocker, critical e major (minor e info sem restrições), (iv) testes unitários com cobertura de código mínima de 80% e (v) menos de 1% de duplicação de código. 
 
 Estar disponibilizado no Heroku (ou em outra plataforma escolhida).
 
@@ -71,7 +82,7 @@ $ npm test
 <h4 align="center">
   Você pode visualizar a aplicação funcionando através do link: <br>
 
-  <a>site aqui</a>
+  <a target="_blank">site aqui</a>
   
 </h4>
 
